@@ -15,7 +15,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  List<String> _sentMessages = [];
+  final List<String> _sentMessages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +92,8 @@ class _ChatState extends State<Chat> {
           TextField(
             onSubmitted: (value) {
               setState(() {
-                print(value);
                 _sentMessages.add(value);
               });
-              print(_sentMessages);
             },
             decoration: InputDecoration(
               isDense: true,

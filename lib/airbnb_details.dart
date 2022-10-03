@@ -4,9 +4,13 @@ import 'package:readmore/readmore.dart';
 class AirbnbDetailsScreen extends StatelessWidget {
   final String title;
   final String image;
+  final String location;
 
   const AirbnbDetailsScreen(
-      {super.key, required this.title, required this.image});
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +37,7 @@ class AirbnbDetailsScreen extends StatelessWidget {
                 )),
           ],
         ),
-        body: Expanded(
-            child: CustomScrollView(
+        body: CustomScrollView(
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate([
@@ -55,7 +58,7 @@ class AirbnbDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         left: 30.0, top: 5, right: 30, bottom: 20),
                     child: Row(
-                      children: [Text(title)],
+                      children: [Text(location)],
                     ),
                   ),
                   const Divider(
@@ -185,6 +188,6 @@ class AirbnbDetailsScreen extends StatelessWidget {
               ]),
             ),
           ],
-        )));
+        ));
   }
 }

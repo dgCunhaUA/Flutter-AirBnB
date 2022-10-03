@@ -14,13 +14,13 @@ class _ExplorePage extends State<Explore> {
   String _searchString = "";
 
   final List _cardList = [
-    ["Nazaré, Portugal", "casa1.jpeg", 4.7, "Praia da Nazaré", "13-21 Oct", 93],
-    ["Nazaré, Portugal", "casa1.jpeg", 4.8, "Praia da Nazaré", "13-21 Oct", 93]
+    ["Braga, Portugal", "casa4.jpeg", 5.0, "Surribes", "13-21 Oct", 270],
   ];
 
   final List _cardListPraias = [
     ["Vigo, Espanha", "casa2.jpeg", 4.81, "Praia das Ratas", "1-6 Nov", 53],
-    ["Porto, Portugal", "casa3.jpeg", 4.62, "Praia do Ourigo", "6-11 Nov", 128]
+    ["Porto, Portugal", "casa3.jpeg", 4.62, "Praia do Ourigo", "6-11 Nov", 128],
+    ["Nazaré, Portugal", "casa1.jpeg", 4.7, "Praia da Nazaré", "13-21 Oct", 93],
   ];
 
   static const List<String> _searchOptions = <String>[
@@ -37,6 +37,7 @@ class _ExplorePage extends State<Explore> {
                 builder: (context) => AirbnbDetailsScreen(
                       title: cardInfo[0],
                       image: cardInfo[1],
+                      location: cardInfo[3],
                     ))),
         child: Container(
           padding: const EdgeInsets.all(10.0),
@@ -163,7 +164,7 @@ class _ExplorePage extends State<Explore> {
           Padding(
             //padding: const EdgeInsets.all(20),
             padding:
-                const EdgeInsets.only(left: 20, top: 35, right: 20, bottom: 10),
+                const EdgeInsets.only(left: 20, top: 50, right: 20, bottom: 10),
             child: Autocomplete<String>(
               optionsBuilder: (TextEditingValue textEditingValue) {
                 if (textEditingValue.text == '') {
@@ -176,7 +177,6 @@ class _ExplorePage extends State<Explore> {
                 });
               },
               onSelected: (String selection) {
-                debugPrint('You just selected $selection');
                 setState(() {
                   _searchString = selection;
                 });
@@ -237,14 +237,11 @@ class _ExplorePage extends State<Explore> {
                   delegate: SliverChildListDelegate([
                     _createFilterCard("Praias", Icons.beach_access),
                     _createFilterCard("Piscinas Incríveis", Icons.pool),
-                    _createFilterCard("Deserto", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
+                    _createFilterCard("Surf", Icons.surfing),
+                    _createFilterCard("Arquitetura", Icons.architecture),
+                    _createFilterCard("Ártico", Icons.ac_unit),
+                    _createFilterCard("Quintas", Icons.agriculture),
+                    _createFilterCard("Pousadas", Icons.coffee),
                   ]),
                 ),
               ],
