@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/explore.dart';
+import 'package:my_app/messages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Airbnb',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -48,213 +50,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<Widget> screens = const [
+    Explore(),
+    SizedBox(),
+    SizedBox(),
+    Messages(),
+    SizedBox()
+  ];
+
   int _selectedIndex = 0;
-  String _selected = "Praias";
-
-  final List _cardList = [
-    ["Nazaré, Portugal", "casa1.jpeg", 4.7, "Praia da Nazaré", "13-21 Oct", 93],
-    ["Nazaré, Portugal", "casa1.jpeg", 4.8, "Praia da Nazaré", "13-21 Oct", 93]
-  ];
-
-  final List _cardListPraias = [
-    ["Vigo, Espanha", "casa2.jpeg", 4.81, "Praia das Ratas", "1-6 Nov", 53],
-    ["Porto, Portugal", "casa3.jpeg", 4.62, "Praia do Ourigo", "6-11 Nov", 128]
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  /*Widget _createCard(String title, String img, double rank, String local,
-      String date, int price) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Card(
-              color: Colors.white,
-              child: Container(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  children: <Widget>[
-                    Image(image: AssetImage('images/$img')),
-                    const Divider(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            title,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 5),
-                          alignment: Alignment.centerRight,
-                          child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: rank.toString(),
-                                  style: const TextStyle(color: Colors.black)),
-                              const WidgetSpan(
-                                  child: Icon(
-                                Icons.star,
-                                size: 14,
-                              ))
-                            ]),
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                        padding: const EdgeInsets.only(top: 5),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          local,
-                          style: const TextStyle(color: Colors.grey),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.only(top: 5),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          date,
-                          style: const TextStyle(color: Colors.grey),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.only(top: 10),
-                        alignment: Alignment.centerLeft,
-                        child: RichText(
-                          text: TextSpan(
-                            style: const TextStyle(color: Colors.black),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '€ $price',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              const TextSpan(text: ' noite'),
-                            ],
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }*/
-
-  Widget _createCard(List cardInfo) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Card(
-              color: Colors.white,
-              child: Container(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  children: <Widget>[
-                    Image(image: AssetImage('images/${cardInfo[1]}')),
-                    const Divider(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            cardInfo[0],
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 5),
-                          alignment: Alignment.centerRight,
-                          child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: cardInfo[2].toString(),
-                                  style: const TextStyle(color: Colors.black)),
-                              const WidgetSpan(
-                                  child: Icon(
-                                Icons.star,
-                                size: 14,
-                              ))
-                            ]),
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                        padding: const EdgeInsets.only(top: 5),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          cardInfo[3],
-                          style: const TextStyle(color: Colors.grey),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.only(top: 5),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          cardInfo[4],
-                          style: const TextStyle(color: Colors.grey),
-                        )),
-                    Container(
-                        padding: const EdgeInsets.only(top: 10),
-                        alignment: Alignment.centerLeft,
-                        child: RichText(
-                          text: TextSpan(
-                            style: const TextStyle(color: Colors.black),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: '€ ${cardInfo[5]}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              const TextSpan(text: ' noite'),
-                            ],
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _createFilterCard(String title, IconData icon) {
-    return TextButton(
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(title == _selected
-            ? Colors.black
-            : const Color.fromARGB(255, 138, 138, 138)),
-      ),
-      onPressed: () => {
-        setState(() {
-          _selected = title;
-        }),
-      },
-      child: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 14,
-          ),
-          Text(
-            title,
-            style: title == _selected
-                ? const TextStyle(color: Colors.black)
-                : const TextStyle(color: Color.fromARGB(255, 138, 138, 138)),
-          ),
-        ],
-      )),
-    );
   }
 
   @override
@@ -266,61 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Center(
-        child: Column(children: [
-          const Text("Pesquisar"),
-          SizedBox(
-            height: 65,
-            child: CustomScrollView(
-              scrollDirection: Axis.horizontal,
-              slivers: [
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    _createFilterCard("Praias", Icons.beach_access),
-                    _createFilterCard("Piscinas Incríveis", Icons.pool),
-                    _createFilterCard("Deserto", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                    _createFilterCard("Ilhas", Icons.deselect_rounded),
-                  ]),
-                ),
-              ],
-            ),
-          ),
-          //const Divider(),
-          Expanded(
-              child: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  //_createCard("Nazaré, Portugal", "casa1.jpeg", 4.7,
-                  //    "Praia da Nazaré", "13-21 Oct", 93),
-                  //_createCardList(),
-                  LayoutBuilder(builder: (context, constraints) {
-                    if (_selected == "") {
-                      return Column(
-                          children: _cardList
-                              .map((cardInfo) => _createCard(cardInfo))
-                              .toList());
-                    } else if (_selected == "Praias") {
-                      return Column(
-                          children: _cardListPraias
-                              .map((cardInfo) => _createCard(cardInfo))
-                              .toList());
-                    } else {
-                      return Text("Erro");
-                    }
-                  })
-                ]),
-              ),
-            ],
-          ))
-        ]),
-      ),
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
